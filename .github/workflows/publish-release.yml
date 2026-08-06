@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - ".release/TRIGGER"
       - ".github/workflows/publish-release.yml"
   workflow_dispatch:
 
