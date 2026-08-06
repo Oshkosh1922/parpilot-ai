@@ -1,5 +1,0 @@
-{
-  "name":"parpilot-ai","version":"0.3.0","private":true,"description":"The cloud operating standard for building, running, and growing exceptional restaurants.","type":"module",
-  "scripts":{"dev":"node --watch server.js","start":"node server.js","test":"node --test","check":"node --check server.js && node --check api/index.js && node --check src/platform/http-app.js && node --check public/app.js && node --check public/home.js && node --check public/start.js && node --check public/guest.js && node --test"},
-  "engines":{"node":">=20"},"keywords":["restaurant","ai","inventory","forecasting","operations","hospitality"],"license":"MIT"
-}

@@ -1,0 +1,50 @@
+name: Publish ParPilot 0.4 Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-parpilot-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Reconstruct verified release
+        run: |
+          set -euo pipefail
+          : > /tmp/parpilot-release.tar.bz2
+          for part in .release/parts/*.b64; do base64 --decode "$part" >> /tmp/parpilot-release.tar.bz2; done
+          echo "0757ff93ae0710311750bc78a1bc22eb731db4d3bdaa1d6e90e26c6e34177328  /tmp/parpilot-release.tar.bz2" | sha256sum -c -
+          mkdir -p /tmp/parpilot-release
+          tar -xjf /tmp/parpilot-release.tar.bz2 -C /tmp/parpilot-release
+          test "$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/parpilot-release/package.json','utf8')).version)")" = "0.4.0"
+      - name: Replace tracked source with release
+        run: |
+          git rm -r --ignore-unmatch .
+          cp -a /tmp/parpilot-release/. .
+      - name: Validate release
+        run: |
+          npm test
+          npm run check
+      - name: Commit verified release
+        run: |
+          git config user.name "ParPilot Release Bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Release ParPilot 0.4 restaurant experience standard"
+          git push origin HEAD:main
