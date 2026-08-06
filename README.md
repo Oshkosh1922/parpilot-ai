@@ -1,108 +1,92 @@
-# ParPilot AI
+# ParPilot
 
-**ParPilot is a low-friction restaurant profitability operating system designed to work above the software and hardware a restaurant already owns.**
+**The cloud operating standard for building, opening, running, and growing exceptional restaurants.**
 
-It is not intended to be another dashboard. The product identifies the small number of actions most likely to improve profit, explains the evidence and risk, waits for approval where appropriate, and records whether the action actually worked.
+ParPilot is designed as one continuous restaurant model rather than another disconnected dashboard. It begins with an aspiring owner's dream, helps shape the concept and safest facility path, carries the plan through funding and opening, then becomes the live decision and guest-experience layer of the restaurant.
 
-![ParPilot status](https://img.shields.io/badge/status-MVP%20foundation-84e5ad)
-![Node](https://img.shields.io/badge/Node-20%2B-84e5ad)
-![Dependencies](https://img.shields.io/badge/runtime%20dependencies-0-84e5ad)
+## Product experiences
 
-## What is included
+### Public product presentation — `/`
 
-- **Restaurant Command Center** with health, forecast, capacity and owner-interruption metrics
-- **Profit Action Ledger** that compares predicted savings with realized outcomes
-- **LocalPulse** for capacity-aware, city-specific campaign generation
-- **Restaurant Graph** digital-twin visualization and confidence tracking
-- **Launch Mode** for concept validation, break-even planning and opening milestones
-- **Integration Fabric** designed around existing POS, accounting, labor, supplier and marketing tools
-- **Human approval controls** for financial, purchasing and public-facing actions
-- **Progressive web app support** for installation on existing phones and tablets
-- **Zero-dependency Node API** so the prototype runs without package installation
-- **Automated engine tests** using Node's built-in test runner
+A polished product narrative and transparent ROI model.
 
-## Run it
+### Venture and Activation Concierge — `/start`
 
-Requirements: Node.js 20 or newer.
+A six-stage interactive setup for three restaurant journeys:
+
+- **Aspiring owner:** vision, market, facility or food-truck path, funding room, professional team, guest standard, and first 30 days
+- **Opening team:** launch dependencies, evidence, milestones, and opening command
+- **Existing restaurant:** read-only connections, Restaurant Graph mapping, confidence-based verification, shadow mode, and bounded activation
+
+### Restaurant Command Center — `/app`
+
+- daily Profit Actions
+- forecasting and capacity
+- LocalPulse marketing
+- Restaurant Graph digital twin
+- Launch Mode
+- integrations and hardware strategy
+
+### Invisible Guest Experience — `/guest`
+
+- honest wait promises
+- truthful menu availability
+- opt-in hospitality memory
+- private in-visit feedback
+- proactive service recovery
+
+## Run locally
+
+Requirements: Node.js 20+
 
 ```bash
 npm start
 ```
 
-Open `http://localhost:3000`.
+Open:
 
-For watch mode:
+- `http://localhost:3000/`
+- `http://localhost:3000/start`
+- `http://localhost:3000/app`
+- `http://localhost:3000/guest`
 
-```bash
-npm run dev
-```
-
-Run validation:
+## Validation
 
 ```bash
 npm test
 npm run check
 ```
 
-## API routes
+The release includes nine automated tests covering profitability logic, promotion capacity, LocalPulse, launch economics, facility-path adaptation, zero-disruption activation, service recovery, and ROI transparency.
 
-| Method | Route | Purpose |
-|---|---|---|
-| `GET` | `/api/health` | Service health |
-| `GET` | `/api/dashboard` | Complete restaurant command-center payload |
-| `GET` | `/api/restaurant-graph` | Digital-twin coverage and confidence |
-| `POST` | `/api/actions/:id` | Approve or dismiss a recommendation |
-| `POST` | `/api/localpulse/generate` | Generate a capacity-aware local campaign |
-| `POST` | `/api/simulate/promotion` | Estimate promotion revenue, profit and capacity risk |
+## Cloud deployment
 
-Example:
+The repository includes `api/index.js` and `vercel.json` for Vercel deployment. Add environment variables from `.env.example`, connect a production database, and register provider OAuth redirect URLs before activating live integrations.
 
-```bash
-curl -X POST http://localhost:3000/api/localpulse/generate \
-  -H 'content-type: application/json' \
-  -d '{"city":"Menasha","region":"WI","objective":"margin","inventoryItem":"cheese curds"}'
-```
+## Production activation path
 
-## Product principles
+1. Deploy presentation mode and connect the domain.
+2. Add PostgreSQL/Supabase tenancy and authentication.
+3. Add one Square design partner in read-only shadow mode.
+4. Add supplier invoice forwarding and verified menu/recipe mapping.
+5. Add Google Maps/Census and commercial listing partners for live facility research.
+6. Add Meta and Google Business Profile publishing only after operational guardrails are reliable.
+7. Measure all claimed value through the Profit Action Ledger.
 
-1. **No mandatory hardware replacement.** Software connections and existing phones come first.
-2. **Exceptions, not dashboards.** Owners should be interrupted only when judgment is needed.
-3. **No recommendation without evidence.** Every action includes reason, confidence, risk and estimated impact.
-4. **No invisible automation.** Actions are permissioned, bounded and reversible.
-5. **Profit, not vanity metrics.** Marketing is evaluated by incremental contribution profit and operational impact.
-6. **Restaurant truth beats demographic stereotypes.** Local context creates testable hypotheses; actual restaurant outcomes train the system.
-7. **The platform must prove its value.** Predicted and realized outcomes are stored in the Profit Action Ledger.
+See:
 
-## Repository structure
+- [`docs/PRODUCT.md`](docs/PRODUCT.md)
+- [`docs/ONBOARDING.md`](docs/ONBOARDING.md)
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+- [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md)
+- [`docs/PRODUCTION-CHECKLIST.md`](docs/PRODUCTION-CHECKLIST.md)
+- [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
-```text
-public/                  Responsive PWA client
-src/data/                Demonstration restaurant data
-src/engine/              Profit, promotion and digital-twin logic
-src/adapters/            Vendor-neutral integration contracts
-src/platform/            Application state layer
-server.js                Dependency-free HTTP and API server
-test/                     Node test suite
-docs/                     Architecture, integration and roadmap documentation
-```
+## Important boundary
 
-## Production path
+The current repository is a presentation-ready executable product and production architecture foundation. It is not yet a fully live multi-tenant restaurant service: real authentication, database persistence, provider credentials, platform reviews, current property feeds, and design-partner validation are still required.
 
-The current repository is an executable product prototype and architecture foundation. It deliberately uses demonstration data and simulated publishing. Production development should proceed in this order:
-
-1. Establish one independent restaurant design partner.
-2. Implement one POS adapter, beginning with Square.
-3. Import catalog, orders and modifiers into a normalized restaurant model.
-4. Add invoice ingestion and human-verified recipe mapping.
-5. Run recommendations in shadow mode before allowing execution.
-6. Measure forecast accuracy, waste avoided, stockouts and realized contribution profit.
-7. Add marketing publishing only after capacity and inventory guardrails are reliable.
-
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md) and [`docs/ROADMAP.md`](docs/ROADMAP.md).
-
-## Safety and limitations
-
-ParPilot must not replace professional food-safety, legal, tax, accounting or employment guidance. Automated recommendations need restaurant-defined limits, audit logs and human override. The demo does not place supplier orders or publish public content.
+ParPilot must not replace qualified legal, accounting, lending, commercial real-estate, licensing, employment, food-safety, or accessibility professionals.
 
 ## License
 

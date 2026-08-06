@@ -1,25 +1,5 @@
 {
-  "name": "parpilot-ai",
-  "version": "0.1.0",
-  "private": true,
-  "description": "A low-friction restaurant profitability operating system that works above existing restaurant infrastructure.",
-  "type": "module",
-  "scripts": {
-    "dev": "node --watch server.js",
-    "start": "node server.js",
-    "test": "node --test",
-    "check": "node --check server.js && node --check public/app.js && node --check src/engine/profit-engine.js && node --check src/engine/local-pulse.js && node --check src/engine/digital-twin.js && node --test"
-  },
-  "engines": {
-    "node": ">=20"
-  },
-  "keywords": [
-    "restaurant",
-    "ai",
-    "inventory",
-    "forecasting",
-    "operations",
-    "local-marketing"
-  ],
-  "license": "MIT"
+  "name":"parpilot-ai","version":"0.3.0","private":true,"description":"The cloud operating standard for building, running, and growing exceptional restaurants.","type":"module",
+  "scripts":{"dev":"node --watch server.js","start":"node server.js","test":"node --test","check":"node --check server.js && node --check api/index.js && node --check src/platform/http-app.js && node --check public/app.js && node --check public/home.js && node --check public/start.js && node --check public/guest.js && node --test"},
+  "engines":{"node":">=20"},"keywords":["restaurant","ai","inventory","forecasting","operations","hospitality"],"license":"MIT"
 }

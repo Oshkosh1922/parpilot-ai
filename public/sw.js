@@ -1,8 +1,4 @@
-const CACHE = "parpilot-v1";
-const ASSETS = ["/", "/styles-1.css", "/styles-2.css", "/styles-3.css", "/styles-4.css", "/styles-5.css", "/app.js", "/favicon.svg", "/manifest.webmanifest"];
-self.addEventListener("install", (event) => event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS))));
-self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));
-self.addEventListener("fetch", (event) => {
-  if (event.request.url.includes("/api/")) return;
-  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
-});
+const CACHE="parpilot-v3";const CORE=["/","/app","/start","/guest","/favicon.svg","/manifest.webmanifest","/home.css","/home.js","/styles.css","/app.js","/start.css","/start.js","/guest.css","/guest.js"];
+self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{})));
+self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
+self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match("/"))))});

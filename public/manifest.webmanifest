@@ -1,12 +1,5 @@
 {
-  "name": "ParPilot AI",
-  "short_name": "ParPilot",
-  "description": "Restaurant profitability operating system",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#07110f",
-  "theme_color": "#07110f",
-  "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
-  ]
+  "name":"ParPilot Restaurant Operating System","short_name":"ParPilot","description":"Build, run, and grow exceptional restaurants with one cloud operating standard.","start_url":"/app","display":"standalone","background_color":"#07110f","theme_color":"#07110f",
+  "icons":[{"src":"/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
+  "shortcuts":[{"name":"Command Center","url":"/app"},{"name":"Aspiring Owner","url":"/start"},{"name":"Guest Experience","url":"/guest"}]
 }
