@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#081513" />
+  <meta name="description" content="ParPilot turns a restaurant idea into a launch-ready venture room." />
+  <title>ParPilot — Build your restaurant</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%2384e5ad%22/><path d=%22M29 73V27h22c14 0 23 8 23 20S65 67 51 67H41v6zm12-17h9c7 0 12-3 12-9s-5-9-12-9h-9z%22 fill=%22%23081513%22/></svg>" />
+  <link rel="stylesheet" href="/base.css" />
+  <link rel="stylesheet" href="/forms.css" />
+  <link rel="stylesheet" href="/dashboard.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="ParPilot home"><span class="brand-mark">P</span><span>ParPilot</span></a>
+    <div class="top-actions">
+      <span id="saveStatus" class="save-status">Not started</span>
+      <button id="recoveryButton" class="button button-ghost hidden" type="button">Private recovery link</button>
+      <button id="resetButton" class="button button-ghost hidden" type="button">Start another</button>
+    </div>
+  </header>
+
+  <main id="app" class="shell" aria-live="polite"></main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="/core.js"></script>
+  <script src="/shell.js"></script>
+  <script src="/flow.js"></script>
+  <script src="/venture.js"></script>
+</body>
+</html>
