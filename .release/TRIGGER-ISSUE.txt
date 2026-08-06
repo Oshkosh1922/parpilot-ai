@@ -1,0 +1,1 @@
+The publication issue is opened separately through GitHub's issue API.
