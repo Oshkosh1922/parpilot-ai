@@ -1,0 +1,1 @@
+ParPilot full product restoration marker. The stripped-down persistence proof is preserved in prior Git history.
