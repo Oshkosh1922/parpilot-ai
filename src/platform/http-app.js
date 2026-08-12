@@ -9,6 +9,7 @@ import { buildLaunchBlueprint } from "../engine/launch-engine.js";
 import { buildGuestExperience } from "../engine/guest-engine.js";
 import { estimateAnnualValue } from "../engine/roi-engine.js";
 import { recommendFacilityPaths, buildOperatingActivationPlan } from "../engine/onboarding-engine.js";
+import { runRestaurantOperator, isAgentConfigured } from "../agents/restaurant-operator.js";
 import { listActions, updateActionStatus } from "./store.js";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
@@ -68,9 +69,21 @@ function dashboard() {
 }
 
 async function api(req, res, url) {
-  if (req.method === "GET" && url.pathname === "/api/health") return json(res, 200, { status: "ok", service: "ParPilot", mode: "presentation", time: new Date().toISOString() });
+  if (req.method === "GET" && url.pathname === "/api/health") return json(res, 200, { status: "ok", service: "ParPilot", mode: isAgentConfigured() ? "agent-enabled" : "presentation", agentConfigured: isAgentConfigured(), time: new Date().toISOString() });
   if (req.method === "GET" && url.pathname === "/api/dashboard") return json(res, 200, dashboard());
   if (req.method === "GET" && url.pathname === "/api/restaurant-graph") return json(res, 200, buildRestaurantGraph({}));
+  if (req.method === "POST" && url.pathname === "/api/agent/run") {
+    const data = await body(req);
+    const objective = String(data.objective || "").trim();
+    if (objective.length > 5000) return json(res, 400, { error: "Objective is too long" });
+    try {
+      const result = await runRestaurantOperator({ objective: objective || undefined, maxTurns: Math.min(Math.max(Number(data.maxTurns) || 10, 1), 20) });
+      return json(res, 200, result);
+    } catch (error) {
+      if (error?.code === "AGENT_NOT_CONFIGURED") return json(res, 503, { error: error.message, code: error.code });
+      throw error;
+    }
+  }
   if (req.method === "POST" && /^\/api\/actions\/[^/]+$/.test(url.pathname)) {
     const id = decodeURIComponent(url.pathname.split("/").pop());
     const data = await body(req);
